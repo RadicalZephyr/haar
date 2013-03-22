@@ -31,3 +31,9 @@
                [(rest trends)
                 (rest flucts)]))
       signal)))
+
+(defn multi-level-haar [signal levels]
+  (if (> levels 0)
+    (let [[trend fluct] (haar-transform signal)]
+      [(multi-level-haar trend (dec levels)) fluct])
+    signal))
